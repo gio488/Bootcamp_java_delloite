@@ -50,15 +50,13 @@ Rode a classe CadastroLojaApplication.java.
 
 A API estará disponível em http://localhost:8080/clientes.
 
-Exemplos de Requisição (JSON)
-POST /clientes
+## 📂 Estrutura do Projeto
 
-📂 Estrutura do Projeto
-Plaintext
+```plaintext
 src/main/java/com/sunshine/cadastro_loja/
-├── controller   # Portas de entrada da API 
+├── controller   # Portas de entrada da API (Endpoints)
 ├── dto          # Objetos de transferência de dados
 ├── model        # Entidades do banco de dados
 ├── repository   # Interfaces de comunicação com o banco
 ├── service      # Regras de negócio e validações
-└── Main.java    # Interface via console 
+└── Main.java    # Interface via console
