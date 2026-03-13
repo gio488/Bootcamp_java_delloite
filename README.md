@@ -1,27 +1,64 @@
-Loja de Revistas Sunshine - Sistema de Cadastro:
-Este é um projeto simples em Java sendo desenvolvido no bootcamp da deloitte para gerenciar o cadastro de clientes de uma banca de revistas. O sistema permite a entrada de dados, atualização e exclusão via console.
+☀️ Cadastro de Loja - Sunshine
+Este projeto é uma API REST para gerenciamento de clientes, desenvolvida com Java 25 e Spring Boot 4. O sistema foca em boas práticas de programação, aplicando princípios SOLID e garantindo a qualidade através de testes unitários.
 
 🚀 Funcionalidades
-O sistema oferece as seguintes operações:
+CRUD Completo de Clientes: Cadastro, listagem, busca por ID, atualização e exclusão.
 
-Cadastro de Cliente: Registro de Nome e CPF com validação de campos vazios.
+Validação de Negócio: Sistema de validação extensível para regras de CPF e outros campos.
 
-Alteração de Dados: Permite atualizar as informações do cliente após o cadastro inicial.
+Banco de Dados H2: Banco de dados em memória para testes rápidos e desenvolvimento.
 
-Exclusão de Cadastro: Remove a referência do objeto cliente do sistema.
-
-Interface via Console: Interação através do terminal.
+Testes Automatizados: Cobertura de testes unitários para a camada de serviço.
 
 🛠️ Tecnologias Utilizadas
-Linguagem: Java 
+Java 25 & Spring Boot 4
 
-Entrada de Dados: java.util.Scanner.
+Spring Data JPA: Para persistência de dados.
 
-Paradigma: Orientação a Objetos (POO).
+JUnit 5 & Mockito: Para testes unitários e simulação de dependências.
+
+Lombok: Para redução de código boilerplate.
+
+Maven: Gerenciador de dependências.
+
+📐 Arquitetura e SOLID
+O projeto foi estruturado seguindo o princípio da Responsabilidade Única (SRP) e o Princípio do Aberto/Fechado (OCP):
+
+A camada de Service utiliza uma lista de validadores (List<ValidadorCliente>).
+
+Isso permite adicionar novas regras de validação (como validar e-mail ou CPF duplicado) apenas criando uma nova classe, sem mexer no código existente do Service.
+
+🧪 Testes Unitários
+Foram implementados testes para garantir que:
+
+Clientes válidos sejam salvos corretamente.
+
+Clientes com CPF inválido lancem uma RuntimeException.
+
+A busca por IDs inexistentes seja tratada.
+
+O fluxo de atualização e deleção funcione conforme o esperado.
+
+🛣️ Como testar a API
+Requisitos
+Java 25 ou superior instalado.
+
+Postman ou Insomnia.
+
+Execução
+Rode a classe CadastroLojaApplication.java.
+
+A API estará disponível em http://localhost:8080/clientes.
+
+Exemplos de Requisição (JSON)
+POST /clientes
 
 📂 Estrutura do Projeto
-O código está organizado em duas classes principais:
-
-Main.java: Contém a lógica de execução e o menu de interação.
-
-Cliente.java: Classe de modelo que representa o cliente com seus atributos e métodos acessores.
+Plaintext
+src/main/java/com/sunshine/cadastro_loja/
+├── controller   # Portas de entrada da API 
+├── dto          # Objetos de transferência de dados
+├── model        # Entidades do banco de dados
+├── repository   # Interfaces de comunicação com o banco
+├── service      # Regras de negócio e validações
+└── Main.java    # Interface via console 
