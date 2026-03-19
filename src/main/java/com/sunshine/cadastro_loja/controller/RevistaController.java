@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class RevistaController {
 
+
+    @GetMapping("/revistas")
+    public String listarTodasRevistas() {
+        return "revistas";
+    }
+
     @GetMapping("/view/revistas/{id}")
     public String vitrine(@PathVariable Long id, Model model) {
         model.addAttribute("clientId", id);
