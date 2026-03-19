@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vitrine Sunshine ☀️</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding-top: 50px; }
+        .container { max-width: 900px; background: white; padding: 30px; border-radius: 15px; }
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body>
+
+<div class="container shadow">
+    <h2 class="text-center mb-4">Escolha suas Revistas ☀️</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card h-100 border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Tecnologia e Futuro</h5>
+                    <p class="card-text text-muted">A melhor revista para se atualizar no mundo da tecnologia!.</p>
+                    <h4 class="text-dark">R$ 29,90</h4>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Quantidade:</label>
+                        <input type="number" id="qtd-tech" class="form-control" value="1" min="1">
+                    </div>
+
+                    <button onclick="finalizar('Tecnologia e Futuro', 'qtd-tech', 29.90)" class="btn btn-primary w-100">
+                        Selecionar Revista
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Bem-Estar e Saúde</h5>
+                    <p class="card-text text-muted">Melhores dicas para a sua saúde!.</p>
+                    <h4 class="text-dark">R$ 19,90</h4>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Quantidade:</label>
+                        <input type="number" id="qtd-moda" class="form-control" value="1" min="1">
+                    </div>
+
+                    <button onclick="finalizar('Bem-Estar e Saúde', 'qtd-moda', 19.90)" class="btn btn-success w-100">
+                        Selecionar Revista
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5 pt-3 border-top">
+        <a th:href="@{/view/clientes/editar/{id}(id=${clientId})}" class="btn btn-outline-secondary">
+            ← Voltar ao meu Perfil
+        </a>
+    </div>
+</div>
+
+<script>
+    function finalizar(nome, inputId, precoUnitario) {
+        let qtd = document.getElementById(inputId).value;
+
+        if (qtd < 1) {
+            alert("Por favor, selecione pelo menos 1 unidade.");
+            return;
+        }
+
+        let valorTotal = qtd * precoUnitario;
+        let totalFormatado = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        alert("✅ " + nome + " escolhida com sucesso!\n" +
+              " Quantidade: " + qtd + "\n" +
+              " Valor Total: " + totalFormatado + "\n\n" +
+              "⏳ Espere a análise para pagamento.");
+    }
+</script>
+
+</body>
+</html>

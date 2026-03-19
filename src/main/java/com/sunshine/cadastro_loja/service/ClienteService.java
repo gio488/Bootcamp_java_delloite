@@ -13,36 +13,40 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
-    // 1. Salvar
+    @Autowired
+    private CPFvalidator cpfValidator;
+
     public Cliente salvar(ClienteDTO dados) {
-        Cliente cliente = new Cliente();
+        cpfValidator.validar(dados);
+
+        Cliente cliente;
+        if (dados.id() != null) {
+            cliente = repository.findById(dados.id()).orElse(new Cliente());
+        } else {
+            cliente = new Cliente();
+        }
+
         cliente.setNome(dados.nome());
-        cliente.setCpf(dados.cpf());
+
+        cliente.setCpf(dados.documento());
+
         return repository.save(cliente);
     }
 
-    // 2. Listar Todos
     public List<Cliente> listarTodos() {
         return repository.findAll();
     }
 
-    // 3. Buscar por ID (Consulta)
     public Cliente buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
 
-    // 4. Atualizar (Editar)
     public Cliente atualizar(Long id, ClienteDTO dados) {
-        Cliente clienteExistente = buscarPorId(id);
-        clienteExistente.setNome(dados.nome());
-        clienteExistente.setCpf(dados.cpf());
-        return repository.save(clienteExistente);
+        return salvar(dados);
     }
 
-    // 5. Excluir (Deletar)
     public void excluir(Long id) {
-        Cliente cliente = buscarPorId(id);
-        repository.delete(cliente);
+        repository.deleteById(id);
     }
 }
